@@ -1,0 +1,31 @@
+# Bỏ qua môi trường ảo
+.venv/
+venv/
+env/
+.env/
+
+# Bỏ qua file Python bytecode
+__pycache__/
+*.py[cod]
+
+# Bỏ qua file log và dữ liệu tạm thời
+*.log
+*.csv
+*.tsv
+*.json
+*.sqlite3
+*.db
+
+
+# Bỏ qua file cấu hình IDE
+.vscode/
+.idea/
+*.iml
+
+# Bỏ qua tệp output từ máy học
+*.h5
+*.ckpt
+*.pkl
+*.joblib
+*.onnx
+*.tflite
