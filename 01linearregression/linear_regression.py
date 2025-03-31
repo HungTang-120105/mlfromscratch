@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import copy
 import io
 import imageio
+sys.path.append("..")
 
 class LinearRegression:
     def __init__(self, alpha, epochs, lambda_ = 0.1, do_visualize = False):
@@ -29,10 +30,12 @@ class LinearRegression:
         return 1/(2*m)*np.sum((y - y_hat) ** 2) + 1/(2*m)*self.lambda_*np.linalg.norm(self.w, ord=2)**2
     
     # Gradient descent for Ridge regression
-    # dloss/dw = 1/m * X.T * (y_hat - y) + 1/m * lambda_ * w
+    # dloss/dw = 1/m * X.T * (y_hat - y) + 1/m * lambda_ * w 
+    # (d,n)
+    # shape dloss/dw = (n, 1)
     def _gradient(self, X, y, y_hat):
         m = X.shape[0]
-        return 1/m * np.dot(X.T, (y_hat - y)) + 1/m * self.lambda_ * self.w
+        return 1/m * (np.dot(X.T, (y_hat - y))) # + 1/m * self.lambda_ * self.w
     
     # dloss/db = 1/m * sum(y_hat - y)
     def _gradient_bias(self, y, y_hat):
@@ -50,6 +53,7 @@ class LinearRegression:
         # compute the gradients
         dw = self._gradient(X_train, y_train, y_hat)
         db = self._gradient_bias(y_train, y_hat)
+
 
         # update the weights and bias
         self.w -= self.alpha * dw
@@ -76,7 +80,7 @@ class LinearRegression:
                 break
 
     def _plot(self, w, b, loss, iteration, X, X_transform, y):
-        y_plot = self._hypothesis(X_transform, w, b)
+        y_plot = self._hypothesis(X_transform)
         plt.figure(0, figsize=(6, 6))
         plt.clf()
         plt.title("Loss: " + str(loss))
@@ -93,7 +97,7 @@ class LinearRegression:
 
     def create_gif(self, X, X_transform, y):
         imgs = []
-        for l, i, w, b in zip(self.vis_elems["loss"], self.vis_elems["iteration"], self.vis_elems["weight"], self.vis_elems["bias"]):
+        for l, i, w, b in zip(self.vis_elems["loss"], self.vis_elems["iteration"], self.vis_elems["weights"], self.vis_elems["bias"]):
             imgs.append(self._plot(w, b, l, i, X, X_transform, y))
         imageio.mimsave("linear_regressionss.gif", imgs, fps=5)
 
