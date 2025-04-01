@@ -10,9 +10,9 @@ __pycache__/
 
 # Bỏ qua file log và dữ liệu tạm thời
 *.log
-*.csv
+
 *.tsv
-*.json
+
 *.sqlite3
 *.db
 
