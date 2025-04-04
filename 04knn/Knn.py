@@ -10,7 +10,7 @@ _metrics = {
 class KNN:
     def __init__(self, X, y, k, metric='euclidean'):
         self.k = k
-        print(f"X type: {type(X)}, y type: {type(y)}")
+        # print(f"X type: {type(X)}, y type: {type(y)}")
         assert type(X) == np.ndarray, "X must be a numpy array"
         assert type(y) == np.ndarray, "y must be a numpy array"
         self.X = X
