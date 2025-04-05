@@ -9,7 +9,7 @@ class DecisionTree:
         'ig': '_information_gain',
     } 
     
-    def __init__(self, max_depth = None, criterion = 'ig'):
+    def __init__(self, max_depth = None, criterion = 'ig', min_samples_split = 2):
         self.max_depth = max_depth
         self.criterion = criterion
         if self.criterion not in DecisionTree._metrics:
@@ -17,6 +17,7 @@ class DecisionTree:
         self.num_class = 0
         self.tree = None
         self.threshold = {}
+        self.min_samples_split = min_samples_split
 
     def _isnumerical(self, feature):
         """
@@ -110,7 +111,7 @@ class DecisionTree:
         return:
             True if the node should stop splitting, False otherwise.
         """
-        return (len(node.used) == node.X.shape[1]) or (len(node.used) == self.max_depth) or (node.entropy() == 0)
+        return (len(node.used) == node.X.shape[1]) or (len(node.used) == self.max_depth) or (node.entropy() == 0) or (node.X.shape[0]< self.min_samples_split)
 
     def _build_dt(self, X_train, root: NodeDT, column_name):
         """
@@ -207,6 +208,17 @@ class DecisionTree:
         label = self._predict(X_new, tree)
         return label
 
-    
+    def predict_all(self, X_new):
+        """
+        Predict the labels of a given sample using the decision tree.
+        param:
+            X_test: The sample to predict.
+        return:
+            The predicted label of the sample.
+        """
+        y_pred = []
+        for x_new in X_new:
+            y_pred.append(self.predict(x_new))
+        return np.array(y_pred)
         
 
