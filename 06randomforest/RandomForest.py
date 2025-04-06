@@ -28,12 +28,12 @@ class RandomForest:
             tree = DecisionTree(max_depth=self.max_depth, criterion=self.criterion, min_samples_split=self.min_samples_split)
             # if self.n_features is None:
             #     self.n_features = X.shape[1]
-            # feature_indices = np.random.choice(X.shape[1], self.n_features, replace=False)
-            # tree.train(X_bootstrap[:, feature_indices], y_bootstrap, feature_indices)
-            # self.trees.append(tree)
-
-            tree.train(X_bootstrap, y_bootstrap, column_name= column_name)
+            feature_indices = np.random.choice(X.shape[1], int(X.shape[1]*0.8), replace=False)
+            tree.train(X_bootstrap[:, feature_indices], y_bootstrap, feature_indices)
             self.trees.append(tree)
+
+            # tree.train(X_bootstrap, y_bootstrap, column_name= column_name)
+            # self.trees.append(tree)
     
     def _most_common_label(self, y):
         counter = Counter(y)

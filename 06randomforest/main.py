@@ -27,11 +27,11 @@ print(f"Custom Random Forest Accuracy: {custom_accuracy:.10f}")
 
 
 
-# dt = DecisionTree(max_depth=10, criterion='ig', min_samples_split=2)
-# dt.train(X_train, y_train, list(data.feature_names))
-# y_pred = dt.predict_all(X_test)
-# custom_accuracy = np.mean(y_pred == y_test)
-# print(f"Custom Decision Tree Accuracy: {custom_accuracy:.10f}")
+dt = DecisionTree(max_depth=10, criterion='ig', min_samples_split=2)
+dt.train(X_train, y_train, list(data.feature_names))
+y_pred = dt.predict_all(X_test)
+custom_accuracy = np.mean(y_pred == y_test)
+print(f"Custom Decision Tree Accuracy: {custom_accuracy:.10f}")
 
 
 
