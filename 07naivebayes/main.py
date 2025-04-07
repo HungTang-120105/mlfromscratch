@@ -25,3 +25,4 @@ if __name__ == "__main__":
     y_pred = custom_nb.predict(X_test)
     custom_accuracy = np.mean(y_pred == y_test)
     print(f"Custom NaiveBayes Accuracy: {custom_accuracy:.6f}")
+
