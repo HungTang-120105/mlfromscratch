@@ -1,12 +1,12 @@
 import LDA as LDA
-from sklearn.datasets import load_iris, load_digits, load_wine
+from sklearn.datasets import load_iris, load_digits, load_wine, fetch_olivetti_faces
 from sklearn.model_selection import train_test_split
 from matplotlib import pyplot as plt
 import numpy as np
 from sklearn.linear_model import LogisticRegression
 
 
-data = load_wine()
+data = fetch_olivetti_faces()
 X, y = data.data, data.target
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=52)
 
